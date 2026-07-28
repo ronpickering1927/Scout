@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from backend.app.models import Opportunity
 
 app = FastAPI(title="Scout API")
 
@@ -14,3 +15,15 @@ def health():
     return {
     "status": "healthy"
 }
+@app.get("/opportunities")
+def get_opportunities() -> list[Opportunity]:
+    
+    return [
+        {
+            "id": 1,
+            "title": "Software Engineer",
+            "company": "OpenAI",
+            "location": "London"
+        }
+    ]
+

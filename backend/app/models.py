@@ -6,5 +6,4 @@ class Opportunity(BaseModel):
     title: str
     company: str
     location: str
-    status: str
-    notes: str
+    
