@@ -17,13 +17,14 @@ def health():
 }
 @app.get("/opportunities")
 def get_opportunities() -> list[Opportunity]:
-    
+
     return [
         {
             "id": 1,
             "title": "Software Engineer",
             "company": "OpenAI",
-            "location": "London"
-        }
-    ]
+            "location": "London",
+       "salary": "£70,000",
+}
+    ]  
 
