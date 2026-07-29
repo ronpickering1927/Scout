@@ -1,7 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from backend.app.models import Opportunity, OpportunityCreate
 
-app = FastAPI(title="Scout API")
+app = FastAPI(
+    title="Scout API",
+    version="0.1.0",
+    description="Scout job opportunity API"
+)
 @app.post("/opportunities")
 def create_opportunity(opportunity: OpportunityCreate):
     new_opportunity = Opportunity(
@@ -14,6 +18,7 @@ def create_opportunity(opportunity: OpportunityCreate):
     )
 
     return new_opportunity
+@app.get("/opportunities")
 def get_opportunities() -> list[Opportunity]:
     opportunities = [
         Opportunity(
