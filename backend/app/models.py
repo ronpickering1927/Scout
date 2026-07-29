@@ -7,3 +7,4 @@ class Opportunity(BaseModel):
     company: str
     location: str
     salary: str
+    url: str
