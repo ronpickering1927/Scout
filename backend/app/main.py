@@ -9,7 +9,7 @@ app = FastAPI(
 @app.post("/opportunities")
 def create_opportunity(opportunity: OpportunityCreate):
     new_opportunity = Opportunity(
-        id=2,
+        id=3,
         title=opportunity.title,
         company=opportunity.company,
         location=opportunity.location,
@@ -28,20 +28,15 @@ def get_opportunities() -> list[Opportunity]:
             location="London",
             salary="£70,000",
             url="https://openai.com/careers",
-        )
+        ),
+        Opportunity(
+            id=2,
+            title="Python Developer",
+            company="Scout Ltd",
+            location="Remote",
+            salary="£60,000",
+            url="https://example.com/job",
+        ),
     ]
 
     return opportunities
-@app.get("/opportunities/{opportunity_id}")
-def get_opportunity(opportunity_id: int):
-    if opportunity_id != 1:
-        raise HTTPException(status_code=404, detail="Opportunity not found")
-
-    return Opportunity(
-        id=1,
-        title="Software Engineer",
-        company="OpenAI",
-        location="London",
-        salary="£70,000",
-        url="https://openai.com/careers",
-    )
