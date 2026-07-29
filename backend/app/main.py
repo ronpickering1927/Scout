@@ -1,8 +1,11 @@
 from fastapi import FastAPI
-from backend.app.models import Opportunity
+from backend.app.models import Opportunity, OpportunityCreate
 
 app = FastAPI(title="Scout API")
 @app.get("/opportunities")
+@app.post("/opportunities")
+def create_opportunity(opportunity: OpportunityCreate):
+    return opportunity
 def get_opportunities() -> list[Opportunity]:
     opportunities = [
         Opportunity(
