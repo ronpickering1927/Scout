@@ -32,3 +32,16 @@ def get_opportunities() -> list[Opportunity]:
     ]
 
     return opportunities
+@app.get("/opportunities/{opportunity_id}")
+def get_opportunity(opportunity_id: int):
+    if opportunity_id != 1:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+
+    return Opportunity(
+        id=1,
+        title="Software Engineer",
+        company="OpenAI",
+        location="London",
+        salary="£70,000",
+        url="https://openai.com/careers",
+    )
