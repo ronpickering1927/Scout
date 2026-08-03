@@ -43,13 +43,17 @@ def get_opportunity(opportunity_id: int):
 
 @app.post("/opportunities")
 def create_opportunity(opportunity: OpportunityCreate):
+    new_id = len(opportunities) + 1
+
     new_opportunity = Opportunity(
-        id=3,
+        id=new_id,
         title=opportunity.title,
         company=opportunity.company,
         location=opportunity.location,
         salary=opportunity.salary,
         url=opportunity.url,
     )
+
+    opportunities.append(new_opportunity)
 
     return new_opportunity
