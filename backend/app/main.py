@@ -57,3 +57,13 @@ def create_opportunity(opportunity: OpportunityCreate):
     opportunities.append(new_opportunity)
 
     return new_opportunity
+
+
+@app.delete("/opportunities/{opportunity_id}")
+def delete_opportunity(opportunity_id: int):
+    for index, opportunity in enumerate(opportunities):
+        if opportunity.id == opportunity_id:
+            deleted = opportunities.pop(index)
+            return deleted
+
+    raise HTTPException(status_code=404, detail="Opportunity not found")
