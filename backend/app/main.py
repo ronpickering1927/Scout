@@ -67,3 +67,21 @@ def delete_opportunity(opportunity_id: int):
             return deleted
 
     raise HTTPException(status_code=404, detail="Opportunity not found")
+
+
+@app.put("/opportunities/{opportunity_id}")
+def update_opportunity(opportunity_id: int, updated: OpportunityCreate):
+    for index, opportunity in enumerate(opportunities):
+        if opportunity.id == opportunity_id:
+            opportunities[index] = Opportunity(
+                id=opportunity_id,
+                title=updated.title,
+                company=updated.company,
+                location=updated.location,
+                salary=updated.salary,
+                url=updated.url,
+            )
+
+            return opportunities[index]
+
+    raise HTTPException(status_code=404, detail="Opportunity not found")
