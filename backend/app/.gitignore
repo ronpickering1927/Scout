@@ -1,20 +1,29 @@
 # Python
+
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 
 # Virtual environment
+
 .venv/
 
 # VS Code
+
 .vscode/
 
 # Environment variables
+
 .env
 
 # macOS
+
 .DS_Store
 
 # Windows
+
 Thumbs.db
+
+
+backend/data/scout.db
