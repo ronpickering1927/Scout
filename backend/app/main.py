@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from backend.app.models import Opportunity, OpportunityCreate
-
+from backend.app.database import create_tables
 app = FastAPI(
     title="Scout API",
     version="0.1.0",
     description="Scout job opportunity API",
 )
-
+create_tables()
 opportunities = [
     Opportunity(
         id=1,
