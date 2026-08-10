@@ -136,3 +136,19 @@ def update_opportunity(opportunity):
 
     connection.commit()
     connection.close()
+
+
+def delete_opportunity(opportunity_id: int):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM opportunities
+        WHERE id = ?
+        """,
+        (opportunity_id,),
+    )
+
+    connection.commit()
+    connection.close()

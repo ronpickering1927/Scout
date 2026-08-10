@@ -25,5 +25,6 @@ __pycache__/
 
 Thumbs.db
 
+# Local SQLite database
 
 backend/data/scout.db
