@@ -6,6 +6,7 @@ from backend.app.database import (
     get_all_opportunities,
     get_opportunity_by_id,
     update_opportunity as db_update_opportunity,
+    delete_opportunity as db_delete_opportunity,
 )
 app = FastAPI(
     title="Scout API",
@@ -91,9 +92,11 @@ def update_opportunity(opportunity_id: int, updated: OpportunityCreate):
 
 @app.delete("/opportunities/{opportunity_id}")
 def delete_opportunity(opportunity_id: int):
-    for index, opportunity in enumerate(opportunities):
-        if opportunity.id == opportunity_id:
-            deleted = opportunities.pop(index)
-            return deleted
+    existing = get_opportunity_by_id(opportunity_id)
 
-    raise HTTPException(status_code=404, detail="Opportunity not found")
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+
+    db_delete_opportunity(opportunity_id)
+
+    return existing
