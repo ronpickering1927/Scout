@@ -30,7 +30,7 @@ opportunities = [
 
 @app.get("/opportunities")
 def get_opportunities() -> list[Opportunity]:
-    return opportunities
+    return get_all_opportunities()
 
 
 @app.get("/opportunities/{opportunity_id}")
