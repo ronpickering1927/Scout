@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
 from backend.app.models import Opportunity, OpportunityCreate
-
+from backend.app.database import add_opportunity, get_all_opportunities
 app = FastAPI(
     title="Scout API",
     version="0.1.0",
@@ -44,7 +44,7 @@ def get_opportunity(opportunity_id: int):
 
 @app.post("/opportunities")
 def create_opportunity(opportunity: OpportunityCreate):
-    new_id = len(opportunities) + 1
+    new_id = 0
 
     new_opportunity = Opportunity(
         id=new_id,
@@ -56,7 +56,7 @@ def create_opportunity(opportunity: OpportunityCreate):
     )
 
     opportunities.append(new_opportunity)
-
+    new_opportunity.id = add_opportunity(new_opportunity)
     return new_opportunity
 
 

@@ -39,11 +39,10 @@ def add_opportunity(opportunity):
     cursor.execute(
         """
         INSERT INTO opportunities
-        (id, title, company, location, salary, url)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (title, company, location, salary, url)
+        VALUES (?, ?, ?, ?, ?)
         """,
         (
-            opportunity.id,
             opportunity.title,
             opportunity.company,
             opportunity.location,
@@ -52,9 +51,12 @@ def add_opportunity(opportunity):
         ),
     )
 
+    new_id = cursor.lastrowid
+
     connection.commit()
     connection.close()
 
+    return new_id
 
 def get_all_opportunities() -> list[Opportunity]:
     connection = get_connection()
