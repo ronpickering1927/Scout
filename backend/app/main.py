@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
 from backend.app.models import Opportunity, OpportunityCreate
-from backend.app.database import add_opportunity, get_all_opportunities
+from backend.app.database import add_opportunity, get_all_opportunities, get_opportunity_by_id
 app = FastAPI(
     title="Scout API",
     version="0.1.0",
@@ -35,11 +35,14 @@ def get_opportunities() -> list[Opportunity]:
 
 @app.get("/opportunities/{opportunity_id}")
 def get_opportunity(opportunity_id: int):
-    for opportunity in opportunities:
-        if opportunity.id == opportunity_id:
-            return opportunity
+    opportunity = get_opportunity_by_id(opportunity_id)
 
-    raise HTTPException(status_code=404, detail="Opportunity not found")
+    if opportunity is None:
+        raise HTTPException(status_code=404, detail="Opportunity not found")
+
+    return opportunity
+
+   
 
 
 @app.post("/opportunities")
