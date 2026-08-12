@@ -8,11 +8,13 @@ from backend.app.database import (
     update_opportunity as db_update_opportunity,
     delete_opportunity as db_delete_opportunity,
 )
+from fastapi.staticfiles import StaticFiles
 app = FastAPI(
     title="Scout API",
     version="0.1.0",
     description="Scout job opportunity API",
 )
+app.mount("/frontend", StaticFiles(directory="backend/frontend"), name="frontend")
 
 opportunities = [
     Opportunity(

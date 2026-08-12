@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout</title>
+</head>
+<body>
+    <h1>Scout</h1>
+
+    <button id="load-opportunities">Load Opportunities</button>
+
+    <div id="opportunities"></div>
+
+    <script>
+        const button = document.getElementById("load-opportunities");
+        const opportunities = document.getElementById("opportunities");
+
+        button.addEventListener("click", async () => {
+            const response = await fetch("/opportunities");
+            const data = await response.json();
+
+            opportunities.innerHTML = "";
+
+            data.forEach((opportunity) => {
+                const item = document.createElement("div");
+
+                item.innerHTML = `
+                    <h2>${opportunity.title}</h2>
+                    <p>${opportunity.company}</p>
+                    <p>${opportunity.location}</p>
+                    <p>${opportunity.salary}</p>
+                `;
+
+                opportunities.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>
