@@ -9,11 +9,20 @@
     <h1>Scout</h1>
 
     <button id="load-opportunities">Load Opportunities</button>
+<h2>Add Opportunity</h2>
 
+<input id="title" placeholder="Title">
+<input id="company" placeholder="Company">
+<input id="location" placeholder="Location">
+<input id="salary" placeholder="Salary">
+<input id="url" placeholder="URL">
+
+<button id="add-opportunity">Add Opportunity</button>
     <div id="opportunities"></div>
 
     <script>
         const button = document.getElementById("load-opportunities");
+        const addButton = document.getElementById("add-opportunity");
         const opportunities = document.getElementById("opportunities");
 
         button.addEventListener("click", async () => {
@@ -34,6 +43,33 @@
 
                 opportunities.appendChild(item);
             });
+        });
+        addButton.addEventListener("click", async () => {
+            const opportunity = {
+                title: document.getElementById("title").value,
+                company: document.getElementById("company").value,
+                location: document.getElementById("location").value,
+                salary: document.getElementById("salary").value,
+                url: document.getElementById("url").value
+            };
+
+            const response = await fetch("/opportunities", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(opportunity)
+            });
+
+            if (response.ok) {
+                document.getElementById("title").value = "";
+                document.getElementById("company").value = "";
+                document.getElementById("location").value = "";
+                document.getElementById("salary").value = "";
+                document.getElementById("url").value = "";
+
+                button.click();
+            }
         });
     </script>
 </body>
